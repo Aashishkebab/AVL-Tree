@@ -15,5 +15,8 @@ public:
 	bool find(int key, int & value);
 	vector<int> findRange(int lowkey, int highkey);
 	bool exists(int key, int value);
+
+private:
+	unsigned long size;
 };
 

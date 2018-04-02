@@ -4,8 +4,9 @@
 using namespace std;	//This is bad style
 
 
-AVLTree::AVLTree(){}
-
+AVLTree::AVLTree(){
+	this->size = 0;
+}
 
 AVLTree::~AVLTree(){}
 
