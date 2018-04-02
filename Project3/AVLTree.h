@@ -14,5 +14,6 @@ public:
 	void print();
 	bool find(int key, int & value);
 	vector<int> findRange(int lowkey, int highkey);
+	bool exists(int key, int value);
 };
 

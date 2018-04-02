@@ -11,8 +11,10 @@ AVLTree::~AVLTree(){}
 
 
 
-
 bool AVLTree::insert(int key, int value){
+	if(exists(key, value)){
+		return false;
+	}
 	return false;	//TODO - remove
 }
 
@@ -36,4 +38,8 @@ bool AVLTree::find(int key, int& value){
 vector<int> AVLTree::findRange(int lowkey, int highkey){
 	vector<int> hi;	//TODO - remove
 	return hi;	//TODO - remove
+}
+
+bool AVLTree::exists(int key, int value){
+
 }
