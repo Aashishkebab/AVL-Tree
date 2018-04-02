@@ -25,7 +25,7 @@ int AVLTree::getHeight(){
 }
 
 int AVLTree::getSize(){
-	return 0;	//TODO - remove
+	return this->size;
 }
 
 void AVLTree::print(){
