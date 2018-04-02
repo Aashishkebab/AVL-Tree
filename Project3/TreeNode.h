@@ -5,6 +5,8 @@ public:
 	TreeNode(int key, int value);
 	int getKey();
 	int getValue();
+	TreeNode * getLeftChild();
+	TreeNode * getRightChild();
 	~TreeNode();
 
 private:
