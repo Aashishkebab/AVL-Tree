@@ -7,6 +7,8 @@ public:
 	int getValue();
 	TreeNode * getLeftChild();
 	TreeNode * getRightChild();
+	void setLeftChild(TreeNode * theNode);
+	void setRightChild(TreeNode * theNode);
 	~TreeNode();
 
 private:
