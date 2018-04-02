@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include "TreeNode.h"
 using namespace std;
 
 class AVLTree{
@@ -18,5 +19,6 @@ public:
 
 private:
 	unsigned long size;
+	TreeNode* root;
 };
 

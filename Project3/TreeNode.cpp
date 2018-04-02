@@ -8,6 +8,12 @@ TreeNode::TreeNode(){
 TreeNode::TreeNode(int key, int value):key(key), value(value){	//This is a C++ initializer list
 }
 
+//The below is the same thing as above, but written in a style that doesn't use initializer lists
+//TreeNode::TreeNode(int key, int value){
+//	this->key = key;
+//	this->value = value;
+//}
+
 int TreeNode::getKey(){
 	return this->key;
 }
@@ -32,11 +38,5 @@ void TreeNode::setLeftChild(TreeNode* theNode){
 void TreeNode::setRightChild(TreeNode* theNode){
 	this->rightChild = theNode;
 }
-
-//The below is the same thing as above, but written in a style that doesn't use initializer lists
-//TreeNode::TreeNode(int key, int value){
-//	this->key = key;
-//	this->value = value;
-//}
 
 TreeNode::~TreeNode(){}

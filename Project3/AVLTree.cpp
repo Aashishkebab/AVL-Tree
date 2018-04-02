@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AVLTree.h"
 #include <vector>
+#include "TreeNode.h"
 using namespace std;	//This is bad style
 
 
@@ -16,6 +17,28 @@ bool AVLTree::insert(int key, int value){
 	if(exists(key, value)){
 		return false;
 	}
+
+	TreeNode* temp = this->root;
+	
+	while(temp){
+		if(key < temp->getKey()){
+			if(temp->getLeftChild()){
+				temp = temp->getLeftChild();
+			}
+			else{
+				temp->setLeftChild(new TreeNode(key, value));
+			}
+		}
+		else{
+			if(temp->getRightChild()){
+				temp = temp->getRightChild();
+			}
+			else{
+				temp->setRightChild(new TreeNode(key, value));
+			}
+		}
+	}
+
 	return false;	//TODO - remove
 }
 
