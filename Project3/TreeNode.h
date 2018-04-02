@@ -10,4 +10,7 @@ public:
 private:
 	int key;
 	int value;
+
+	TreeNode* leftChild;
+	TreeNode* rightChild;
 };
