@@ -20,13 +20,14 @@ bool AVLTree::insert(int key, int value){
 
 	TreeNode* temp = this->root;
 	
-	while(temp){
+	while(true){
 		if(key < temp->getKey()){
 			if(temp->getLeftChild()){
 				temp = temp->getLeftChild();
 			}
 			else{
 				temp->setLeftChild(new TreeNode(key, value));
+				return true;
 			}
 		}
 		else{
@@ -35,11 +36,10 @@ bool AVLTree::insert(int key, int value){
 			}
 			else{
 				temp->setRightChild(new TreeNode(key, value));
+				return true;
 			}
 		}
 	}
-
-	return false;	//TODO - remove
 }
 
 
