@@ -14,7 +14,7 @@ AVLTree::~AVLTree(){}
 
 
 bool AVLTree::insert(int key, int value){
-	if(exists(key, value)){
+	if(exists(key, this->root)){
 		return false;
 	}
 
@@ -64,6 +64,19 @@ vector<int> AVLTree::findRange(int lowkey, int highkey){
 	return hi;	//TODO - remove
 }
 
-bool AVLTree::exists(int key, int value){
+bool AVLTree::exists(int key, TreeNode* start){
+	if(!start){
+		return false;
+	}
 
+	TreeNode* temp = start;
+	if(temp->getKey() == key){
+		return true;
+	}
+
+	bool doesExist = false;
+	doesExist = exists(key, temp->getLeftChild());
+	doesExist = exists(key, temp->getRightChild());
+
+	return doesExist;
 }

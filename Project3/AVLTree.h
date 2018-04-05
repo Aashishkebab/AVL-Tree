@@ -15,7 +15,7 @@ public:
 	void print();
 	bool find(int key, int & value);
 	vector<int> findRange(int lowkey, int highkey);
-	bool exists(int key, int value);
+	bool exists(int key, TreeNode* start);
 
 private:
 	unsigned long size;
