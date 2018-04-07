@@ -73,12 +73,7 @@ void AVLTree::print(TreeNode* node){
 }
 
 bool AVLTree::find(int key, int& value){
-	if(find(this->root, key, value)){
-		return true;
-	}
-	else{
-		return false;
-	}
+	return find(this->root, key, value);
 }
 
 bool AVLTree::find(TreeNode* node, int key, int& value){
@@ -95,7 +90,7 @@ bool AVLTree::find(TreeNode* node, int key, int& value){
 	if(node->getLeftChild()){
 		if(find(node->getLeftChild(), key, value)){
 			return true;
-		 }
+		}
 	}
 	return false;
 }
