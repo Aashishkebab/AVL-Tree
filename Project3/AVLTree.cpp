@@ -15,12 +15,18 @@ AVLTree::~AVLTree(){}
 
 bool AVLTree::insert(int key, int value){
 	if(exists(key, this->root)){
+		cout << "\n\nCannot add key that already exists!";
 		return false;
 	}
 
+	if(!this->root){
+		this->root = new TreeNode(key, value);
+		return true;
+	}
+
 	TreeNode* temp = this->root;
-	
-	while(true){
+
+	while(temp){
 		if(key < temp->getKey()){
 			if(temp->getLeftChild()){
 				temp = temp->getLeftChild();
@@ -40,6 +46,7 @@ bool AVLTree::insert(int key, int value){
 			}
 		}
 	}
+	return false;
 }
 
 
@@ -52,7 +59,17 @@ int AVLTree::getSize(){
 }
 
 void AVLTree::print(){
+	print(this->root);
+}
 
+void AVLTree::print(TreeNode* temp){
+	if(temp->getRightChild()){
+		print(temp->getRightChild());
+	}
+	cout << "\n" << temp->getKey() << ", " << temp->getValue();
+	if(temp->getLeftChild()){
+		print(temp->getLeftChild());
+	}
 }
 
 bool AVLTree::find(int key, int& value){
