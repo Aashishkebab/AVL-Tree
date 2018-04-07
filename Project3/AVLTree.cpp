@@ -62,23 +62,48 @@ void AVLTree::print(){
 	print(this->root);
 }
 
-void AVLTree::print(TreeNode* temp){
-	if(temp->getRightChild()){
-		print(temp->getRightChild());
+void AVLTree::print(TreeNode* node){
+	if(node->getRightChild()){
+		print(node->getRightChild());
 	}
-	cout << "\n" << temp->getKey() << ", " << temp->getValue();
-	if(temp->getLeftChild()){
-		print(temp->getLeftChild());
+	cout << "\n" << node->getKey() << ", " << node->getValue();
+	if(node->getLeftChild()){
+		print(node->getLeftChild());
 	}
 }
 
 bool AVLTree::find(int key, int& value){
-	return false;	//TODO - remove
+	if(find(this->root, key, value)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+bool AVLTree::find(TreeNode* node, int key, int& value){
+	if(node->getKey() == key){
+		value = node->getValue();
+		return true;
+	}
+
+	if(node->getRightChild()){
+		if(find(node->getRightChild(), key, value)){
+			return true;
+		}
+	}
+	if(node->getLeftChild()){
+		if(find(node->getLeftChild(), key, value)){
+			return true;
+		 }
+	}
+	return false;
 }
 
 vector<int> AVLTree::findRange(int lowkey, int highkey){
-	vector<int> hi;	//TODO - remove
-	return hi;	//TODO - remove
+	vector<int> theRange;
+
+	return theRange;
 }
 
 bool AVLTree::exists(int key, TreeNode* start){

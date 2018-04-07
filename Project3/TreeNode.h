@@ -5,6 +5,7 @@ public:
 	TreeNode(int key, int value);
 	int getKey();
 	int getValue();
+	void setValue(int& value);
 	TreeNode * getLeftChild();
 	TreeNode * getRightChild();
 	void setLeftChild(TreeNode * theNode);

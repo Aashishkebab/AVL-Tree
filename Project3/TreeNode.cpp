@@ -2,8 +2,7 @@
 #include "TreeNode.h"
 
 
-TreeNode::TreeNode(){
-}
+TreeNode::TreeNode(){}
 
 TreeNode::TreeNode(int key, int value):key(key), value(value){	//This is a C++ initializer list
 }
@@ -28,6 +27,14 @@ int TreeNode::getValue(){
 		return NULL;
 	}
 	return this->value;
+}
+
+void TreeNode::setValue(int& value){
+	if(!this){
+		throw "Cannot set value of null node";
+		return;
+	}
+	this->value = value;
 }
 
 TreeNode* TreeNode::getLeftChild(){
