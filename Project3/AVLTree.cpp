@@ -115,7 +115,7 @@ vector<int>* AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<
 	return theRange;
 }
 
-//vector<int> AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<int>* theRange){	//Tail recursion
+//vector<int>* AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<int>* theRange){	//Tail recursion
 //	vector<int> theRange;
 //
 //	if(node->getValue() >= lowkey && node->getValue() <= highkey){
