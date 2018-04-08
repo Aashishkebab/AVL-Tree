@@ -96,10 +96,41 @@ bool AVLTree::find(TreeNode* node, int key, int& value){
 }
 
 vector<int> AVLTree::findRange(int lowkey, int highkey){
-	vector<int> theRange;
+	return *(findRange(this->root, lowkey, highkey, new vector<int>));
+}
+
+vector<int>* AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<int>* theRange){	//Head recursion
+	if(node->getValue() >= lowkey && node->getLeftChild()){
+		theRange = findRange(node->getLeftChild(), lowkey, highkey, theRange);
+	}
+	if(node->getValue() <= highkey && node->getRightChild()){
+		theRange = findRange(node->getRightChild(), lowkey, highkey, theRange);
+	}
+
+	if(node->getValue() >= lowkey && node->getValue() <= highkey){
+		theRange->push_back(node->getKey());
+		theRange->push_back(node->getValue());
+	}
 
 	return theRange;
 }
+
+//vector<int> AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<int>* theRange){	//Tail recursion
+//	vector<int> theRange;
+//
+//	if(node->getValue() >= lowkey && node->getValue() <= highkey){
+//		theRange.push_back(node->getValue());
+//	}
+//
+//	if(node->getValue() >= lowkey && node->getLeftChild()){
+//		findRange(node->getLeftChild(), lowkey, highkey);
+//	}
+//	if(node->getValue() <= highkey && node->getRightChild()){
+//		findRange(node->getRightChild(), lowkey, highkey);
+//	}
+//
+//return theRange;
+//}
 
 bool AVLTree::exists(int key, TreeNode* start){
 	if(!start){

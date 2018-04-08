@@ -17,6 +17,7 @@ public:
 	bool find(int key, int& value);
 	bool find(TreeNode* root, int key, int& value);
 	vector<int> findRange(int lowkey, int highkey);
+	vector<int>* findRange(TreeNode* node, int lowkey, int highkey, vector<int>* theRange);
 	bool exists(int key, TreeNode* start);
 
 private:
