@@ -119,7 +119,8 @@ vector<int>* AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<
 //	vector<int> theRange;
 //
 //	if(node->getValue() >= lowkey && node->getValue() <= highkey){
-//		theRange.push_back(node->getValue());
+//		theRange->push_back(node->getKey());
+//		theRange->push_back(node->getValue());
 //	}
 //
 //	if(node->getValue() >= lowkey && node->getLeftChild()){
