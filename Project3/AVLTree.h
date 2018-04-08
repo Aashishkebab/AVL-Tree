@@ -13,7 +13,7 @@ public:
 	int getHeight();
 	int getSize();
 	void print();
-	void print(TreeNode* temp);
+	void print(TreeNode* node, unsigned short height);
 	bool find(int key, int& value);
 	bool find(TreeNode* root, int key, int& value);
 	vector<int> findRange(int lowkey, int highkey);

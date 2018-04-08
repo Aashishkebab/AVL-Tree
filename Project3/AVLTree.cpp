@@ -59,16 +59,22 @@ int AVLTree::getSize(){
 }
 
 void AVLTree::print(){
-	print(this->root);
+	print(this->root, 0);
 }
 
-void AVLTree::print(TreeNode* node){
+void AVLTree::print(TreeNode* node, unsigned short height){
 	if(node->getRightChild()){
-		print(node->getRightChild());
+		print(node->getRightChild(), height + 1);
 	}
-	cout << "\n" << node->getKey() << ", " << node->getValue();
+
+	cout << "\n";
+	for(unsigned short i = 0; i < height; i++){
+		cout << "\t";
+	}
+	cout << node->getKey() << ", " << node->getValue();
+
 	if(node->getLeftChild()){
-		print(node->getLeftChild());
+		print(node->getLeftChild(), height + 1);
 	}
 }
 
