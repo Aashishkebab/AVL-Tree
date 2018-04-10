@@ -33,8 +33,13 @@ static int max(int value1, int value2){
 //}
 
 bool AVLTree::insert(int key, int value){
-	this->root = insert(this->root, key, value);
-	return this->root;
+	try{
+		this->root = insert(this->root, key, value);
+		return true;
+	}
+	catch(...){	//This should never happen
+		return false;
+	}
 }
 
 TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
@@ -49,15 +54,26 @@ TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
 		node->setRightChild(insert(node->getRightChild(), key, value));
 	}
 	else{
+		throw "Duplicate";
 		return node;
 	}
 
 	node->setHeight(max(node->getLeftChild()->getHeight(), node->getRightChild()->getHeight()) + 1);
 
-	if(node->getBalance() >= 1){
+	short balance = node->getBalance();
+
+	if(balance > 1 && key < node->getLeftChild()->getKey()){
 		return rightRotate(node);
 	}
-	if(node->getBalance() <= -1){
+	if(balance < -1 && key > node->getRightChild()->getKey()){
+		return leftRotate(node);
+	}
+	if(balance > 1 && key > node->getLeftChild()->getKey()){
+		node->setLeftChild(leftRotate(node->getLeftChild()));
+		return rightRotate(node);
+	}
+	if(balance < -1 && key < node->getRightChild()->getKey()){
+		node->setRightChild(rightRotate(node->getRightChild()));
 		return leftRotate(node);
 	}
 
