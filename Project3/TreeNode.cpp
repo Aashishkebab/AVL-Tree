@@ -70,4 +70,46 @@ void TreeNode::setRightChild(TreeNode* theNode){
 	this->rightChild = theNode;
 }
 
+//void TreeNode::incrementLeftDepth(){
+//	leftDepth++;
+//}
+//
+//void TreeNode::incrementRightDepth(){
+//	rightDepth++;
+//}
+//
+//unsigned short TreeNode::getLeftDepth(){
+//	return this->leftDepth;
+//}
+//
+//unsigned short TreeNode::getRightDepth(){
+//	return this->rightDepth;
+//}
+//
+//void TreeNode::setLeftDepth(unsigned short number){
+//	this->leftDepth = number;
+//}
+//
+//void TreeNode::setRightDepth(unsigned short number){
+//	this->rightDepth = number;
+//}
+
+void TreeNode::setHeight(unsigned short height){
+	this->height = height;
+}
+
+unsigned short TreeNode::getHeight(){
+	if(!this){
+		return 0;
+	}
+	return this->height;
+}
+
+short TreeNode::getBalance(){
+	if(!this){
+		return 0;
+	}
+	return this->getLeftChild()->getHeight() - this->getRightChild()->getHeight();
+}
+
 TreeNode::~TreeNode(){}

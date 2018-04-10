@@ -2,6 +2,7 @@
 #include "AVLTree.h"
 #include <vector>
 #include "TreeNode.h"
+#include <cmath>
 using namespace std;	//This is bad style
 
 
@@ -11,47 +12,99 @@ AVLTree::AVLTree(){
 
 AVLTree::~AVLTree(){}
 
+static int max(int value1, int value2){
+	if(value1 >= value2){
+		return value1;
+	}
+	else{
+		return value2;
+	}
+}
 
+//bool AVLTree::insert(TreeNode*& node, int key){
+//	if(node){
+//
+//	}
+//	if(key < node->getKey()){
+//		TreeNode* lc = node->getLeftChild();
+//		insert(lc, key);
+//		node->setLeftDepth(max(node->getLeftChild()->getLeftDepth(), node->getLeftChild()->getRightDepth()) + 1);
+//	}
+//}
 
 bool AVLTree::insert(int key, int value){
-	if(exists(key, this->root)){
-		cout << "\n\nCannot add key that already exists!";
-		return false;
+	this->root = insert(this->root, key, value);
+	return this->root;
+}
+
+TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
+	if(!node){
+		return new TreeNode(key, value);
 	}
 
-	if(!this->root){
-		this->root = new TreeNode(key, value);
-		return true;
+	if(key < node->getValue()){
+		node->setLeftChild(insert(node->getLeftChild(), key, value));
+	}
+	else if(key > node->getValue()){
+		node->setRightChild(insert(node->getRightChild(), key, value));
+	}
+	else{
+		return node;
 	}
 
-	TreeNode* temp = this->root;
+	node->setHeight(max(node->getLeftChild()->getHeight(), node->getRightChild()->getHeight()) + 1);
 
-	while(temp){
-		if(key < temp->getKey()){
-			if(temp->getLeftChild()){
-				temp = temp->getLeftChild();
-			}
-			else{
-				temp->setLeftChild(new TreeNode(key, value));
-				return true;
-			}
-		}
-		else{
-			if(temp->getRightChild()){
-				temp = temp->getRightChild();
-			}
-			else{
-				temp->setRightChild(new TreeNode(key, value));
-				return true;
-			}
-		}
+	if(node->getBalance() >= 1){
+		return rightRotate(node);
 	}
-	return false;
+	if(node->getBalance() <= -1){
+		return leftRotate(node);
+	}
+
+	return node;
 }
 
 
+//bool AVLTree::insert(int key, int value){	//BST Insert
+//	if(exists(key, this->root)){
+//		cout << "\n\nCannot add key that already exists!";
+//		return false;
+//	}
+//
+//	if(!this->root){
+//		this->root = new TreeNode(key, value, 0, 0);
+//		return true;
+//	}
+//
+//	TreeNode* temp = this->root;
+//
+//	while(temp){
+//		if(key < temp->getKey()){
+//			if(temp->getLeftChild()){
+//				temp->incrementLeftDepth();
+//				temp = temp->getLeftChild();
+//			}
+//			else{
+//		 		temp->setLeftChild(new TreeNode(key, value, temp->getLeftDepth() + 1, temp->getLeftDepth() + 1));
+//				return true;
+//			}
+//		}
+//		else{
+//			if(temp->getRightChild()){
+//				temp->incrementRightDepth();
+//				temp = temp->getRightChild();
+//			}
+//			else{
+//				temp->setRightChild(new TreeNode(key, value, temp->getLeftDepth() + 1, temp->getLeftDepth() + 1));
+//				return true;
+//			}
+//		}
+//	}
+//	return false;
+//}
+
 int AVLTree::getHeight(){
-	return 0;	//TODO - remove
+	return 0;
 }
 
 int AVLTree::getSize(){
@@ -153,4 +206,30 @@ bool AVLTree::exists(int key, TreeNode* start){
 	doesExist = exists(key, temp->getRightChild());
 
 	return doesExist;
+}
+
+TreeNode* AVLTree::leftRotate(TreeNode* node){
+	TreeNode* newRoot = node->getRightChild();
+	TreeNode* temp = newRoot->getLeftChild();
+
+	newRoot->setLeftChild(node);
+	node->setRightChild(temp);
+
+	node->setHeight(max(node->getLeftChild()->getHeight(), node->getRightChild()->getHeight()) + 1);
+	newRoot->setHeight(max(newRoot->getLeftChild()->getHeight(), newRoot->getRightChild()->getHeight()) + 1);
+
+	return newRoot;
+}
+
+TreeNode* AVLTree::rightRotate(TreeNode* node){
+	TreeNode* newRoot = node->getLeftChild();
+	TreeNode* temp = newRoot->getRightChild();
+
+	newRoot->setRightChild(node);
+	node->setLeftChild(temp);
+
+	node->setHeight(max(node->getLeftChild()->getHeight(), node->getRightChild()->getHeight()) + 1);
+	newRoot->setHeight(max(newRoot->getLeftChild()->getHeight(), newRoot->getRightChild()->getHeight()) + 1);
+
+	return newRoot;
 }
