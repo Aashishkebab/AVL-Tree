@@ -120,7 +120,7 @@ TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
 //}
 
 int AVLTree::getHeight(){
-	return 0;
+	return this->root->getHeight() + 1;
 }
 
 int AVLTree::getSize(){
