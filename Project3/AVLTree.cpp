@@ -10,15 +10,12 @@ AVLTree::AVLTree(){
 	this->size = 0;
 }
 
-AVLTree::~AVLTree(){}
+AVLTree::~AVLTree(){
+	delete this->root;
+}
 
 static int max(int value1, int value2){
-	if(value1 >= value2){
-		return value1;
-	}
-	else{
-		return value2;
-	}
+	return (value1 > value2) ? value1 : value2;	//Ternary operator
 }
 
 //bool AVLTree::insert(TreeNode*& node, int key){
@@ -35,9 +32,10 @@ static int max(int value1, int value2){
 bool AVLTree::insert(int key, int value){
 	try{
 		this->root = insert(this->root, key, value);
+		this->size++;
 		return true;
 	}
-	catch(...){	//This should never happen
+	catch(...){	//If duplicate
 		return false;
 	}
 }
@@ -53,7 +51,7 @@ TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
 	else if(key > node->getValue()){
 		node->setRightChild(insert(node->getRightChild(), key, value));
 	}
-	else{
+	else{	//If equals (duplicate value)
 		throw "Duplicate";
 		return node;
 	}
@@ -62,17 +60,18 @@ TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
 
 	short balance = node->getBalance();
 
-	if(balance > 1 && key < node->getLeftChild()->getKey()){
+	//Rotations
+	if(balance > 1 && key < node->getLeftChild()->getKey()){	//Left-left
 		return rightRotate(node);
 	}
-	if(balance < -1 && key > node->getRightChild()->getKey()){
+	if(balance < -1 && key > node->getRightChild()->getKey()){	//Rihgt-right
 		return leftRotate(node);
 	}
-	if(balance > 1 && key > node->getLeftChild()->getKey()){
+	if(balance > 1 && key > node->getLeftChild()->getKey()){	//Left-right
 		node->setLeftChild(leftRotate(node->getLeftChild()));
 		return rightRotate(node);
 	}
-	if(balance < -1 && key < node->getRightChild()->getKey()){
+	if(balance < -1 && key < node->getRightChild()->getKey()){	//Right-left
 		node->setRightChild(rightRotate(node->getRightChild()));
 		return leftRotate(node);
 	}
@@ -81,7 +80,7 @@ TreeNode* AVLTree::insert(TreeNode* node, int key, int value){
 }
 
 
-//bool AVLTree::insert(int key, int value){	//BST Insert
+//bool AVLTree::insert(int key, int value){	//BST iterative insert
 //	if(exists(key, this->root)){
 //		cout << "\n\nCannot add key that already exists!";
 //		return false;
@@ -207,6 +206,10 @@ vector<int>* AVLTree::findRange(TreeNode* node, int lowkey, int highkey, vector<
 //	return theRange;
 //}
 
+/***********************************
+Purpose:	Checks if a node in the tree with the
+				specified key already exists.
+**********************************/
 bool AVLTree::exists(int key, TreeNode* start){
 	if(!start){
 		return false;
@@ -232,7 +235,7 @@ TreeNode* AVLTree::leftRotate(TreeNode* node){
 	node->setRightChild(temp);
 
 	node->setHeight(max(node->getLeftChild()->getHeight(), node->getRightChild()->getHeight()) + 1);
-	newRoot->setHeight(max(newRoot->getLeftChild()->getHeight(), newRoot->getRightChild()->getHeight()) + 1);
+	newRoot->setHeight(max(newRoot->getLeftChild()->getHeight(), newRoot->getRightChild()->getHeight()) + 1);	//I apologize for the length of this line that I am now making longer by adding this comment...
 
 	return newRoot;
 }

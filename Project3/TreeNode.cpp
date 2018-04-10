@@ -2,7 +2,10 @@
 #include "TreeNode.h"
 
 
-TreeNode::TreeNode(){}
+TreeNode::TreeNode(){
+	delete this->leftChild;
+	delete this->rightChild;
+}
 
 TreeNode::TreeNode(int key, int value):key(key), value(value){	//This is a C++ initializer list
 }
